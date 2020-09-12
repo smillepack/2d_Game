@@ -7,6 +7,9 @@ export default class KeyPressUp {
         document.querySelectorAll('button').forEach((el, index) => {
             document.querySelectorAll('button')[index].addEventListener('mousedown', this.handleKey.bind(this, true, el.innerHTML))
             document.querySelectorAll('button')[index].addEventListener('mouseup', this.handleKey.bind(this, false, el.innerHTML))
+
+            document.querySelectorAll('button')[index].addEventListener('touchstart', this.handleKey.bind(this, true, el.innerHTML))
+            document.querySelectorAll('button')[index].addEventListener('touchend', this.handleKey.bind(this, false, el.innerHTML))
         })
 
         document.addEventListener('keydown', this.handleKey.bind(this, true) )
