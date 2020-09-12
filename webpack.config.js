@@ -12,7 +12,7 @@ module.exports = {
     watch: true,
     entry: {
         index: './src/index.js',
-        style: './src/styles/style.css'
+        // style: './src/styles/style.css'
     },
     output: {
         filename: '[name].bundle.js',
