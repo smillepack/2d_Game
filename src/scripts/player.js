@@ -19,6 +19,8 @@ export default class Player {
         this.maxSpeed = 5
         this.lastDirection = ''
 
+        this.inertion = 0.95
+
         // gravity specifications
         this.gravityCurrentSpeed = 0
         this.gravityAcceleration = 0.1
@@ -61,21 +63,18 @@ export default class Player {
     }
 
     move(direction, wall, symbol) {
-
-        if (this.lastDirection == direction) {
-            if (this.currentSpeed < this.maxSpeed) this.currentSpeed += this.speedAcceleration
-        } else this.currentSpeed = 0
+        if (Math.abs(this.currentSpeed) < this.maxSpeed) this.currentSpeed += symbol * this.speedAcceleration
 
         if (direction == 'right') {
             if (this.position.x + this.currentSpeed > wall) this.currentSpeed = wall - this.position.x
         } 
-        else {
-            if (this.position.x - this.currentSpeed < wall) this.currentSpeed = this.position.x - wall
+        else if (direction == 'left') {
+            if (this.position.x + this.currentSpeed < wall) this.currentSpeed = wall - this.position.x
         }
 
         this.lastDirection = direction
 
-        return symbol * this.currentSpeed
+        return this.currentSpeed
     }
 
     jump(roof) {
@@ -159,9 +158,9 @@ export default class Player {
 
                         speeds = { x: 0, y: 0}
                     }
-                    
-                }
-            }     
+            
+                } 
+            }  
 
         }) 
 
@@ -182,11 +181,40 @@ export default class Player {
         let leftWall  = Math.max(...limits.leftWalls)  
 
         // move left/right
-        // can i move right ? yes, but if not a wall there
-        if      (this.keys.right && this.position.x < rightWall) speedX = this.move('right', rightWall, 1)
-        else if (this.keys.left  && this.position.y > leftWall)  speedX = this.move('left', leftWall, -1)
-        else this.lastDirection = ''
+        if      (this.keys.right && this.position.x < rightWall) speedX = this.move('right',rightWall,  1)
+        else if (this.keys.left  && this.position.y > leftWall)  speedX = this.move('left', leftWall,  -1)
+        else {
 
+            // inertion
+
+            if ( Math.floor(10 * Math.abs(this.currentSpeed)) == 0 ) {
+                this.lastDirection = ''
+                this.currentSpeed = 0
+            } else {           
+
+                if (this.currentSpeed > 0) {
+                            
+                    if (this.position.x + this.currentSpeed > rightWall) {
+                        this.currentSpeed = rightWall - this.position.x
+                    } else {
+                        this.currentSpeed *= this.inertion
+                        speedX = this.currentSpeed
+                    }
+                }  
+                else if (this.currentSpeed < 0) {
+                    if (this.position.x + this.currentSpeed < leftWall) {
+                        this.currentSpeed = leftWall - this.position.x
+                    } else {
+                        this.currentSpeed *= this.inertion
+                        speedX = this.currentSpeed
+                    }
+                }
+
+                
+            }
+        } 
+
+        
 
         // jump
         if ( (this.keys.up && this.canJump ) || this.takeOff) speedY += this.jump(roof)
