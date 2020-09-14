@@ -1,8 +1,11 @@
 export default class Player {
-    constructor(context, keys, mapObjects) {
+    constructor(context, keys, mapObjects, gameWidth, gameHeight) {
         this.context = context
         this.keys = keys 
         this.mapObjects = mapObjects.objects
+
+        this.gameWidth = gameWidth
+        this.gameHeight = gameHeight
 
         // player specifications
         this.width = 10
@@ -19,7 +22,7 @@ export default class Player {
         this.maxSpeed = 5
         this.lastDirection = ''
 
-        this.inertion = 0.95
+        this.inertion = 0.99
 
         // gravity specifications
         this.gravityCurrentSpeed = 0
@@ -62,19 +65,8 @@ export default class Player {
         return { floors, roofs, leftWalls, rightWalls }
     }
 
-    move(direction, wall, symbol) {
+    move(symbol) {
         if (Math.abs(this.currentSpeed) < this.maxSpeed) this.currentSpeed += symbol * this.speedAcceleration
-
-        if (direction == 'right') {
-            if (this.position.x + this.currentSpeed > wall) this.currentSpeed = wall - this.position.x
-        } 
-        else if (direction == 'left') {
-            if (this.position.x + this.currentSpeed < wall) this.currentSpeed = wall - this.position.x
-        }
-
-        this.lastDirection = direction
-
-        return this.currentSpeed
     }
 
     jump(roof) {
@@ -181,39 +173,26 @@ export default class Player {
         let leftWall  = Math.max(...limits.leftWalls)  
 
         // move left/right
-        if      (this.keys.right && this.position.x < rightWall) speedX = this.move('right',rightWall,  1)
-        else if (this.keys.left  && this.position.y > leftWall)  speedX = this.move('left', leftWall,  -1)
+        if      (this.keys.right && this.position.x < rightWall) this.move(1)
+        else if (this.keys.left  && this.position.y > leftWall)  this.move(-1)
         else {
-
             // inertion
-
-            if ( Math.floor(10 * Math.abs(this.currentSpeed)) == 0 ) {
-                this.lastDirection = ''
-                this.currentSpeed = 0
-            } else {           
-
-                if (this.currentSpeed > 0) {
-                            
-                    if (this.position.x + this.currentSpeed > rightWall) {
-                        this.currentSpeed = rightWall - this.position.x
-                    } else {
-                        this.currentSpeed *= this.inertion
-                        speedX = this.currentSpeed
-                    }
-                }  
-                else if (this.currentSpeed < 0) {
-                    if (this.position.x + this.currentSpeed < leftWall) {
-                        this.currentSpeed = leftWall - this.position.x
-                    } else {
-                        this.currentSpeed *= this.inertion
-                        speedX = this.currentSpeed
-                    }
-                }
-
-                
-            }
+            if ( Math.floor(10 * Math.abs(this.currentSpeed)) == 0 ) this.currentSpeed = 0 
+            else this.currentSpeed *= this.inertion        
         } 
 
+        if (this.currentSpeed > 0) {                       
+            if (this.position.x + this.currentSpeed > rightWall) {
+                this.currentSpeed = rightWall - this.position.x
+            } 
+        }  
+        else if (this.currentSpeed < 0) {
+            if (this.position.x + this.currentSpeed < leftWall) {
+                this.currentSpeed = leftWall - this.position.x
+            } 
+        }
+
+        speedX = this.currentSpeed
         
 
         // jump
@@ -231,7 +210,10 @@ export default class Player {
         ctx.save()
 
         ctx.fillStyle = this.color 
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+        // test version
+        ctx.fillRect( (this.gameWidth - this.width) / 2 , (this.gameHeight - this.height) / 2, this.width, this.height)
 
         ctx.restore()
     }

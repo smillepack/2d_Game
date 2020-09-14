@@ -55,6 +55,8 @@ export default class KeyPressUp {
                 this.right = value
 
                 break
+            
+            
             default:
                 break
         }

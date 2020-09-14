@@ -18,6 +18,10 @@ button {
           user-select: none;
 }
 
+canvas {
+  border: 1px solid black;
+}
+
 .canvasContainer {
   display: -webkit-box;
   display: -ms-flexbox;
