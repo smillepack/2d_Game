@@ -22,7 +22,7 @@ export default class Player {
         this.maxSpeed = 5
         this.lastDirection = ''
 
-        this.inertion = 0.99
+        this.inertion = 0.95
 
         // gravity specifications
         this.gravityCurrentSpeed = 0
@@ -210,9 +210,6 @@ export default class Player {
         ctx.save()
 
         ctx.fillStyle = this.color 
-        // ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-        // test version
         ctx.fillRect( (this.gameWidth - this.width) / 2 , (this.gameHeight - this.height) / 2, this.width, this.height)
 
         ctx.restore()
