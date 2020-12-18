@@ -1,29 +1,77 @@
-export default class Map {
-    constructor(context, mapObjects, playerPosition, centerX, centerY) {
-        this.map = mapObjects.objects
-        
-        this.center = {
-            x: centerX,
-            y: centerY
-        }
-        this.playerPosition = playerPosition
+import Wall from '../images/Objects.png'
+import DethThings from '../images/deathThings.png'
 
+import {
+    GAME_HEIGHT,
+    GAME_WIDTH,
+    centerX, 
+    centerY,
+    arr
+} from './cosnts.js'
+
+
+export default class Map {
+    constructor(context, mapObjects, playerPosition) {
+        this.map = mapObjects.objects
+        this.playerPosition = playerPosition
         this.context = context
     }
 
     render() {
         let ctx = this.context
 
-        let offsetX =  this.center.x - this.playerPosition.x
-        let offsetY = this.center.y - this.playerPosition.y 
+        let offsetX =  centerX - this.playerPosition.x
+        let offsetY = centerY - this.playerPosition.y 
+
+        let img = new Image()
+        img.src = Wall
+        
+        let dethImg = new Image()
+        dethImg.src = DethThings
 
         ctx.save()
 
-        this.map.forEach(el => {
-            ctx.fillStyle = el.color
+        //background
+        for (let i = 1; i < Math.ceil(GAME_WIDTH / 64); i++) {
+            for (let j = 1; j < Math.ceil(GAME_HEIGHT /64); j++) {
+                ctx.drawImage(img, 64, 0, 64, 64, 64 * i + offsetX, 64 * j + offsetY,  64, 64)
+            }
+        }
 
-            ctx.fillRect(el.x1 + offsetX, el.y1 + offsetY, el.width, el.height)
+        // deth zone
+        for (let i = 1; i < Math.ceil(GAME_WIDTH / 64); i++) {
+            
+            ctx.drawImage(dethImg, 
+                arr[i - 1], 0, 
+                64, 172, 
+                64 * i + offsetX, GAME_HEIGHT - 64 * 3.5 + offsetY,  
+                64, 172)
+        }
+
+
+        // map objects
+        this.map.forEach(el => {
+            let drawImage = new Image()
+            drawImage.src = el.image
+
+            ctx.fillStyle = el.bgColor
+            ctx.fillRect(el.x1 + offsetX, el.y1 + offsetY,  el.width, el.height)
+
+            if (el.standartSize) {
+                for (let i = 0; i < Math.ceil(el.width / 64); i++) {
+                    for (let j = 0; j < Math.ceil(el.height /64); j++) {                    
+                        ctx.drawImage(drawImage, 
+                                    el.imageStartX, el.imageStartY, 
+                                    el.imageW, el.imageH, 
+                                    64 * i + el.x1 + offsetX, 64 * j + el.y1 + offsetY,  
+                                    64, 64)
+                    }
+                }
+            } 
+            
         })
+                    
+
 
         ctx.restore()
     }

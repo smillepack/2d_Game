@@ -1,61 +1,50 @@
 export default class KeyPressUp {
-    constructor() {
-        this.left  = false
-        this.right = false 
-        this.up    = false
-
-        document.querySelectorAll('button').forEach((el, index) => {
-            document.querySelectorAll('button')[index].addEventListener('mousedown', this.handleKey.bind(this, true, el.innerHTML))
-            document.querySelectorAll('button')[index].addEventListener('mouseup', this.handleKey.bind(this, false, el.innerHTML))
-
-            document.querySelectorAll('button')[index].addEventListener('touchstart', this.handleKey.bind(this, true, el.innerHTML))
-            document.querySelectorAll('button')[index].addEventListener('touchend', this.handleKey.bind(this, false, el.innerHTML))
-        })
+    constructor(key) {
+        this.left   = false
+        this.right  = false 
+        this.up     = false
+        this.attack = false
+        this.block  = false
 
         document.addEventListener('keydown', this.handleKey.bind(this, true) )
         document.addEventListener('keyup', this.handleKey.bind(this, false))
+
+        this.arrKeys = [ [65, 87, 68, 70, 71] ]
+        this.key = key == 'awdfg' ? 0 : 1
     }
 
-    handleKey(value, event, text) {
-        switch (event) {
-            case 'up':
-                
-                this.up = value
-                break
-            
-            case 'left':
-                this.left = value
-                break
+    handleKey(value, event) {
+        let arr = this.arrKeys
 
-            case 'right':
-                this.right = value
-                break
-
-            default:
-                break
-        }
-
-
+        // console.log(event.keyCode, value)
         switch (event.keyCode) {
             // left
-            case 37:
-            case 65: 
+            case arr[this.key][0]:
                 this.left = value
                 break
 
             // jump
-            case 38:
-            case 87: 
+            case arr[this.key][1]:
                 this.up = value
                 break
 
             // right
-            case 39: 
-            case 68:
+            case arr[this.key][2]:
                 this.right = value
 
                 break
             
+            // attack
+            case arr[this.key][3]:
+                this.attack = value
+
+                break
+            
+            // block 
+            case arr[this.key][4]:
+                this.block = value  
+
+                break
             
             default:
                 break

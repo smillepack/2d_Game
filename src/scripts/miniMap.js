@@ -12,7 +12,7 @@ export default class MiniMap{
             y: 0
         }
 
-        this.koef = 3
+        this.koef = 5
 
         this.width = gameWidth / this.koef
         this.height = gameHeight / this.koef
@@ -22,11 +22,10 @@ export default class MiniMap{
         let ctx = this.ctx
 
         ctx.save()
-
-        ctx.rect(this.position.x, this.position.y, this.width, this.height)
         ctx.stroke()
 
-        ctx.fillStyle = 'gray'
+        // background-color:
+        ctx.fillStyle = 'transparent'
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
 
 

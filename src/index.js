@@ -1,48 +1,57 @@
 import Player from './scripts/player.js'
+import PlayerAnimation from './scripts/playerAnimation.js'
 import KeyPressUp from './scripts/keypressAciton.js'
+
 import Map from './scripts/map.js'
 import MapObject from './scripts/mapObjects.js'
 import MiniMap from './scripts/miniMap.js'
-import { buttons } from './scripts/buttons.js'
-import style from './styles/style.css'
 
-const GAME_HEIGHT = 160
-const GAME_WIDHT  = 200
-const WALL_WIDTH  = 5
+import ParametrsForFixBags from './scripts/parametrsForFixBags.js'
+import ctx from './scripts/canvas.js'
+import {
+    canvas_height,
+    canvas_width,
+} from './scripts/cosnts.js'
 
-let root = document.getElementById('root')
-root.classList.add('canvasContainer')
+import II from './scripts/II.js'
+import  './styles/style.css'
 
-let canvasContainer = document. createElement('div')
-let canvas = document.createElement('canvas')
-    canvas.width = GAME_WIDHT
-    canvas.height = GAME_HEIGHT
 
-canvasContainer.append(canvas)
+let globalId = {
+    animation: ''
+}
 
-root.append(canvasContainer)
-root.append(buttons)
+let mapObjects      = new MapObject()
 
-let ctx = canvas.getContext('2d')
+// player 1
+let keyPressUp      = new KeyPressUp('awdfg', globalId)
+let player          = new Player(ctx, keyPressUp, mapObjects)
+let playerAnimation = new PlayerAnimation(ctx, player, keyPressUp, 1)
 
-let centerX = GAME_WIDHT / 2 - 5
-let centerY = GAME_HEIGHT / 2 - 5
 
-let mapObjects = new MapObject(GAME_HEIGHT, GAME_WIDHT, WALL_WIDTH)
+let ii = new II(ctx, {}, mapObjects, player)
 
-let keyPressUp = new KeyPressUp()
-let player     = new Player(ctx, keyPressUp, mapObjects, GAME_WIDHT, GAME_HEIGHT)
-let map        = new Map(ctx, mapObjects, player.position, centerX, centerY)
-let miniMap    = new MiniMap(ctx, mapObjects.objects, player, GAME_WIDHT, GAME_HEIGHT)
+
+let map             = new Map(ctx, mapObjects, player.position)
+// let miniMap         = new MiniMap(ctx, mapObjects.objects, player, canvas_width, canvas_height)
+// let displayParam    = new ParametrsForFixBags(ctx, player)
+
+
 
 function gameLoop() {
-    ctx.clearRect(0, 0, GAME_WIDHT, GAME_HEIGHT)
+    ctx.clearRect(0, 0, canvas_width, canvas_height)
+    map.render()
 
     player.render()
-    map.render()
-    miniMap.render()
+    playerAnimation.render()
 
-    requestAnimationFrame(gameLoop)
+    ii.render()
+    // playerAnimation2.render()
+
+    // miniMap.render()
+    // displayParam.render()
+
+    globalId.animation = requestAnimationFrame(gameLoop)
 }
 
 gameLoop()

@@ -4,16 +4,13 @@ import {
     PLAYER_SPECIFICATION
 } from './cosnts.js'
 
-export default class Player {
-    constructor(context, keys, mapObjects) {
+export default class II {
+    constructor(context, keys, mapObjects, player) {
         this.context = context
         this.keys = keys 
         this.mapObjects = mapObjects.objects
 
-        this.center = {
-            x: centerX,
-            y: centerY
-        }
+        this.player = player
  
         // player specifications
         this.width = 22
@@ -21,11 +18,10 @@ export default class Player {
 
         // start position
         this.position = {
-            x: 64 * 5,
-            y: 64 * 6
+            x: 64 * 2,
+            y: 64 * 4
         }
 
-        
         // moving specifications
         this.currentSpeed = 0
         this.speedAcceleration = 0.1
@@ -255,9 +251,8 @@ export default class Player {
 
         // for testing
         ctx.save()
-
-        ctx.fillStyle = 'red'
-        ctx.fillRect(this.center.x, this.center.y, this.width, this.height)
+        ctx.fillStyle = 'green'
+        ctx.fillRect(centerX - this.player.position.x + this.position.x, centerY - this.player.position.y + this.position.y, this.width, this.height)
 
         ctx.restore()
     }

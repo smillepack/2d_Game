@@ -20,7 +20,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Fighter 2D',
+            title: '',
             template: './src/index.html',
             minify: false
         }),
@@ -41,6 +41,12 @@ module.exports = {
                     'style-loader',
                     'css-loader',
                 ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                  'file-loader',
+                ],
             }
         ]
     }
