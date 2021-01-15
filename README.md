@@ -19,4 +19,4 @@ G - Блок.
 * Canvas
 * Webpack
 
-Ссылка: [2D Platform](https://smillepack.github.io/2d_Game/dist/)
+Ссылка: [2D Platform game](https://smillepack.github.io/2d_Game/dist/)
