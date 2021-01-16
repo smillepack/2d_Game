@@ -1,4 +1,4 @@
-import Wall from '../images/Objects.png'
+import Wall from '../images/objects.png'
 import DethThings from '../images/deathThings.png'
 
 import {
@@ -6,13 +6,14 @@ import {
     GAME_WIDTH,
     centerX, 
     centerY,
-    arr
+    arr,
+    mapObjects
 } from './cosnts.js'
 
 
 export default class Map {
-    constructor(context, mapObjects, playerPosition) {
-        this.map = mapObjects.objects
+    constructor(context, playerPosition) {
+        this.map = mapObjects
         this.playerPosition = playerPosition
         this.context = context
     }
@@ -52,8 +53,10 @@ export default class Map {
         // map objects
         this.map.forEach(el => {
             let drawImage = new Image()
-            drawImage.src = el.image
+            drawImage.src = el.imageSrc
 
+
+            // fill bg for clean view of image
             ctx.fillStyle = el.bgColor
             ctx.fillRect(el.x1 + offsetX, el.y1 + offsetY,  el.width, el.height)
 

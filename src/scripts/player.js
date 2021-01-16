@@ -1,14 +1,14 @@
 import {
     centerX,
     centerY,
-    PLAYER_SPECIFICATION
+    mapObjects
 } from './cosnts.js'
 
 export default class Player {
-    constructor(context, keys, mapObjects) {
+    constructor(context, keys, startPostion) {
         this.context = context
         this.keys = keys 
-        this.mapObjects = mapObjects.objects
+        this.mapObjects = []
 
         this.center = {
             x: centerX,
@@ -21,8 +21,7 @@ export default class Player {
 
         // start position
         this.position = {
-            x: 64 * 5,
-            y: 64 * 6
+            ...startPostion
         }
 
         
@@ -47,6 +46,11 @@ export default class Player {
         // attack
         this.attackPressed = false
     }
+
+    addEnemyToTheMapObjects(enemy) {
+        this.mapObjects = [...mapObjects, enemy]
+    }
+
 
     findMoveLimits() {
         let floors = []
@@ -253,12 +257,16 @@ export default class Player {
         this.position.y += newSpeeds.y
 
 
+        // enemy will be real object
+        this.x1 = this.position.x
+        this.y1 = this.position.y
+
         // for testing
-        ctx.save()
+        // ctx.save()
 
-        ctx.fillStyle = 'red'
-        ctx.fillRect(this.center.x, this.center.y, this.width, this.height)
+        // ctx.fillStyle = 'red'
+        // ctx.fillRect(this.center.x, this.center.y, this.width, this.height)
 
-        ctx.restore()
+        // ctx.restore()
     }
 }

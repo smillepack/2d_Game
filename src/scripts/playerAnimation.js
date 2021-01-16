@@ -6,13 +6,16 @@ import {
 
 
 export default class PlayerAnimation {
-    constructor(context, player, keyPress, NumberOfHero) {
+    constructor(context, player, keyPress, NumberOfHero, centerKey, speacialPostion) {
         this.ctx = context
         this.keyPress = keyPress
         this.player = player
 
         this.centerX = animationCenterX
         this.centerY = animationCenterY
+
+        this.centerKey = centerKey
+        this.speacialPostion = speacialPostion
 
         // player sprites 
         this.hero = new Image()
@@ -75,11 +78,22 @@ export default class PlayerAnimation {
         
     }
 
+
     drawStaticImage(xPosition, yPosition) {
+        let x, y
+
+        if (this.centerKey) {
+            x = this.centerX
+            y = this.centerY
+        } else {
+            x = this.centerX - this.speacialPostion.x + this.player.position.x
+            y = this.centerY - this.speacialPostion.y  + this.player.position.y
+        }
+
         this.ctx.drawImage(this.hero, 
             xPosition, yPosition, 
             this.size, this.size, 
-            this.centerX, this.centerY,  
+            x, y, 
             this.size, this.size) 
     }
 
