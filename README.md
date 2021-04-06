@@ -1,6 +1,4 @@
 # 2D Platform game
-
-## Описание
 Проект делается  в развлекательных и образовательных целях. Сам создал физическую модель.
 
 ## Управление
@@ -18,5 +16,9 @@ G - Блок.
 * ECMAScript 6
 * Canvas
 * Webpack
+* React
+* Redux
+* React Router
+* React Hooks
 
-Ссылка: [2D Platform game](https://smillepack.github.io/2d_Game/dist/)
+Demo: [2D Platform game](https://smillepack.github.io/2d_Game/dist/)
