@@ -1,0 +1,73 @@
+* 
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    color: white
+
+$max-width: 1200px
+$hover-color: #ec6161
+
+// @font-face 
+//     font-family: PottaOne
+//     src: url('../../fonts/PottaOne-Regular.ttf')
+//     font-display: swap
+
+button
+    background: none
+    cursor: pointer
+
+.header
+    display: flex 
+    justify-content: center
+    width: 100%
+
+.headerContianer
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    max-width: $max-width
+    height: 20vh
+
+.headerContaienrMainText
+    // font-family: PottaOne
+    font-weight: bold
+    font-size: 2em
+    letter-spacing: 2px
+
+.main
+    display: flex 
+    justify-content: center
+    width: 100%
+
+.mainContainer
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    height: 60vh
+    max-width: $max-width
+
+.mainContainerElement
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 20%
+
+.mainContainerElementLinkContainer
+    flex-direction: column
+
+.mainContainerElementLinkContainerEl
+    border: 1px solid white
+    border-radius: 5px
+    margin: 10px
+    padding: 10px
+    // font-family: PottaOne
+    font-size: 1.5em
+    letter-spacing: 2px
+    text-transform: uppercase
+    text-decoration: none
+    &:hover
+        color: $hover-color 
+        border-color: $hover-color
+

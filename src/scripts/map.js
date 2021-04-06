@@ -1,5 +1,5 @@
-import Wall from '../images/objects.png'
-import DethThings from '../images/deathThings.png'
+import Wall from 'Images/objects.png'
+import DethThings from 'Images/deathThings.png'
 
 import {
     GAME_HEIGHT,

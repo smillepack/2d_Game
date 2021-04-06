@@ -1,0 +1,91 @@
+* 
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    color: white
+
+$max-width: 1200px
+$hover-color: #ec6161
+
+// @font-face 
+//     font-family: PottaOne
+//     src: url('../../fonts/PottaOne-Regular.ttf')
+//     font-display: swap
+
+.header2
+    display: flex 
+    justify-content: center 
+    width: 100%
+
+.header2Container
+    display: flex
+    justify-content: space-between
+    width: 100%
+    max-width: $max-width
+    height: 10vh
+
+.header2ContainerBackBtn
+    display: flex 
+    justify-content: center
+    align-items: center
+    border: 1px solid white
+    border-radius: 5px
+    margin-top: 10px
+    padding: 10px
+    // font-family: PottaOne
+    font-weight: bold
+    font-size: 2em
+    letter-spacing: 2px
+    &   img 
+        width: 50px
+        height: 50px
+
+.header2ContainerInfoText
+    display: flex 
+    justify-content: center
+    align-items: center
+    // font-family: PottaOne
+    font-weight: bold
+    font-size: 2em
+    letter-spacing: 2px
+
+
+.main2
+    display: flex 
+    justify-content: center 
+    width: 100%
+
+
+.main2Container
+    display: flex
+    justify-content: center
+    flex-direction: row
+    width: 100%
+    max-width: $max-width
+
+.main2ContainerRow
+    display: flex 
+    align-items: center
+    height: 64px
+    // font-family: PottaOne
+    font-weight: bold
+    font-size: 1.5em
+    letter-spacing: 2px
+
+.main2ContinerLCol
+    margin: 10px
+    & > .main2ContainerRow
+        justify-content: flex-end
+
+.main2ContinerRCol    
+    margin: 10px
+    & > .main2ContainerRow
+        justify-content: flex-start
+
+.keyboardLetter
+    border: 1px solid white
+    width: 40px
+    height: 40px
+    border-radius: 5px
+    padding: 5px
+    margin: 5px

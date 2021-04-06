@@ -9,6 +9,7 @@ export default class Player {
         this.context = context
         this.keys = keys 
         this.mapObjects = []
+        this.enemy = {}
 
         this.center = {
             x: centerX,
@@ -29,7 +30,7 @@ export default class Player {
         this.currentSpeed = 0
         this.speedAcceleration = 0.1
         this.maxSpeed = 5
-        this.lastDirection = ''
+        this.lastDirection = 0
 
         this.inertion = 0.15
 
@@ -45,10 +46,18 @@ export default class Player {
 
         // attack
         this.attackPressed = false
+        this.attackRange = 30
+
+        // health
+        this.enemyAttackedMe = false
+
+        //death
+        this.death = false
     }
 
     addEnemyToTheMapObjects(enemy) {
         this.mapObjects = [...mapObjects, enemy]
+        this.enemy = enemy
     }
 
 
@@ -256,17 +265,35 @@ export default class Player {
         this.position.x += newSpeeds.x
         this.position.y += newSpeeds.y
 
+        //death
+        // if (this.position.y )
+
 
         // enemy will be real object
         this.x1 = this.position.x
         this.y1 = this.position.y
 
-        // for testing
-        // ctx.save()
 
-        // ctx.fillStyle = 'red'
-        // ctx.fillRect(this.center.x, this.center.y, this.width, this.height)
 
-        // ctx.restore()
+
+        // attack thing
+        // right - 0
+        // left - 64
+        if (this.attackPressed) {
+            if (this.lastDirection == 0) {
+                if (this.position.x + this.width + this.attackRange > this.enemy.position.x &&
+                    this.position.x + this.width <= this.enemy.position.x                   &&
+                    this.position.y == this.enemy.position.y)
+
+                this.enemy.position.x += 5
+
+            } else if (this.position.x - this.attackRange < this.enemy.position.x + this.enemy.width &&
+                       this.position.x  >= this.enemy.position.x + this.enemy.width                  &&
+                       this.position.y == this.enemy.position.y) {
+                this.enemy.position.x -= 5
+            }
+        } 
+
+
     }
 }

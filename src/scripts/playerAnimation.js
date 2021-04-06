@@ -54,6 +54,8 @@ export default class PlayerAnimation {
 
         this.counter++        
         this.lastDirection = direction
+
+        this.player.lastDirection = this.lastDirection
     }
 
     attack() {
@@ -101,6 +103,7 @@ export default class PlayerAnimation {
         this.lastDirection = this.keyPress.right ? 0 : 
                              this.keyPress.left ?  this.size : this.lastDirection
 
+        this.player.lastDirection = this.lastDirection
 
         if (this.stop && !this.keyPress.attack) this.stop = false
 
