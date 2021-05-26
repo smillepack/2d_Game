@@ -21,4 +21,4 @@ G - Блок.
 * React Router
 * React Hooks
 
-Demo: [2D Platform game](https://smillepack.github.io/2d_Game/dist/)
+<!-- Demo: [2D Platform game](https://smillepack.github.io/2d_Game/dist/) -->
