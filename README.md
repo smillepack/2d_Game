@@ -1,6 +1,11 @@
 # 2D Platform game
 Проект делается  в развлекательных и образовательных целях. Сам создал физическую модель.
 
+## Как играть
+git clone https://github.com/smillepack/2d_Game.git
+npm install
+npm start
+
 ## Управление
 A, W, D - Перемещение.
 
