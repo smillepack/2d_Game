@@ -20,7 +20,7 @@ import IDGen from 'Scripts/idgen.js'
 import { changeCurrentHero } from 'ReduxComp/reduxThing.js'
 
 import  'Style/style.sass'
-
+import BackArrow from '../../icons/arrow.svg'
 
 function Game(props) {
     const [ctx, setCtx] = React.useState(null)
@@ -74,13 +74,13 @@ function Game(props) {
     return(
         <>              
             <div>
-                <div>
-                    <Link to="/start">back</Link>
-                </div>
-                <div>
-                    Game
-                </div>
-                    
+                    <Link className={'headerContainerBackBtn'} to={'/start'}>
+                            <img src={BackArrow} alt={"back arrow"}/>
+                        <div>
+                            back
+                        </div>
+                    </Link>
+                 
             </div>
             <div>
                 <canvas id={customId} className='canvasContainer' width={canvas_width} height={canvas_height}></canvas>             

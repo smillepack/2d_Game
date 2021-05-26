@@ -22,6 +22,11 @@ function Start(props) {
         props.changeCurrentHero(String(val.target.id)[5])
     }
 
+    React.useEffect(() => {
+        console.log(props)
+        document.querySelectorAll(`#${formId} > div > input`)[props.currentHero - 1].checked = true
+    })
+
     return (
         <>
             <header className={'header header22'}>
@@ -59,26 +64,26 @@ function Start(props) {
             </header>
 
             <main>
-                <form id={formId} onChange={handleFormChange}>
-                    <div>
+                <form id={formId} onChange={handleFormChange} className={'herosContainer'}>
+                    <div className={'element'}>
                         <input type="radio" name="heros" id="radio1" defaultChecked />
                         <label htmlFor="radio1">                                                            
                             <Canvas heroNumber={1}></Canvas>
                         </label>
                     </div>
-                    <div>
+                    <div className={'element'}>
                         <input type="radio" name="heros" id="radio2" />
                         <label htmlFor="radio2">                                            
                             <Canvas heroNumber={2}></Canvas>
                         </label>
                     </div>
-                    <div>
+                    <div className={'element'}>
                         <input type="radio" name="heros" id="radio3" />
                         <label htmlFor="radio3">                                           
                             <Canvas heroNumber={3}></Canvas>
                         </label>
                     </div>
-                    <div>
+                    <div className={'element'}>
                         <input type="radio" name="heros" id="radio4"/>
                         <label htmlFor="radio4">                                            
                             <Canvas heroNumber={4}></Canvas>
@@ -86,7 +91,10 @@ function Start(props) {
                     </div>                                                            
                 </form>
             </main>
-            <Link to="/game">Play</Link>
+            <div className={'playBtnContainer'}>
+                <Link to="/game" className={'playBtn'}>Play</Link>
+            </div>
+            
         </>
     )
 }

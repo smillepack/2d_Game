@@ -37,6 +37,7 @@ $hover-color: #ec6161
     font-size: 2em
     letter-spacing: 2px
     height: 70px
+    text-decoration: none
     &   img 
         width: 50px
         height: 50px
@@ -87,3 +88,46 @@ $hover-color: #ec6161
     height: 30px
     border: 1px solid white
     border-top: 0
+
+.herosContainer
+    display: flex
+    justify-content: center
+    position: relative
+
+    .element
+        position: relative
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+        input
+            display: none
+            label 
+                position: relative
+            &:checked ~ label
+                
+                &::before
+                    content: ""
+                    position: absolute
+                    top: -30px
+                    left: 35px
+                    border-top: 30px solid red
+                    border-bottom: 0
+                    border-left: 30px solid transparent
+                    border-right: 30px solid transparent
+
+.playBtnContainer
+    display: flex
+    justify-content: center
+    width: 100%
+
+
+.playBtn
+    border: 1px solid white
+    border-radius: 5px
+    padding: 10px 20px
+    letter-spacing: 1px
+    font-weight: bold
+    text-decoration: none
+    text-transform: uppercase

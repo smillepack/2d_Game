@@ -8,7 +8,7 @@ import { combineReducers } from 'redux'
 const appSlice = createSlice({
     name: 'app',
     initialState: {
-        currentHero: 1,
+        currentHero: 3,
     },
     reducers: {
         changeCurrentHero: (state, action) =>   { 
