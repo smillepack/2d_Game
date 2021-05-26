@@ -3,7 +3,9 @@
 
 ## Как играть
 git clone https://github.com/smillepack/2d_Game.git
+
 npm install
+
 npm start
 
 ## Управление
